@@ -23,6 +23,7 @@ target
 # Development items
 .vscode
 dev/
+config.toml
 
 # Added by cargo
 

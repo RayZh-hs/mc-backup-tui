@@ -21,11 +21,41 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+use serde::{Deserialize, Serialize};
+use crate::typealias::Result;
+
+#[derive(Debug, Clone, Default)]
+#[derive(Serialize, Deserialize)]
 pub struct Config {
+    api_config: ApiConfig,
+}
+
+#[derive(Debug, Clone, Default)]
+#[derive(Serialize, Deserialize)]
+pub struct ApiConfig {
+    pub hostname: String,
+    pub port: u16,
+    pub access_token: String,
 }
 
 impl Config {
-    pub fn new_default() -> Self {
-        Config {}
+    pub fn default() -> Self {
+        Self {
+            api_config: ApiConfig {
+                hostname: "localhost".to_string(),
+                port: 8080,
+                access_token: "".to_string(),
+            },
+        }
+    }
+
+    pub fn from_file(path: &str) -> Result<Self> {
+        let config_content = std::fs::read_to_string(path)?;
+        let config: Config = toml::from_str(&config_content)?;
+        Ok(config)
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.api_config.access_token.is_empty()
     }
 }

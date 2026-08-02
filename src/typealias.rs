@@ -1,5 +1,3 @@
-/// Definies and implements of the main mc-backup-tui application.
-
 /*
  Copyright (c) 2026 RayZh
 
@@ -21,37 +19,4 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-use ratatui::{DefaultTerminal, Frame};
-use std::io;
-use crate::config::Config;
-
-#[derive(Debug)]
-pub struct App {
-    config: Config,
-    exit: bool,
-}
-
-impl App {
-    pub fn new(config: Config) -> Self {
-        Self {
-            config,
-            exit: false,
-        }
-    }
-
-    pub fn run(&mut self, t: &mut DefaultTerminal) -> Result<(), Box<dyn std::error::Error>> {
-        while !self.exit {
-            t.draw(|f| self.draw_frame(f))?;
-            self.handle_events()?;
-        }
-        Ok(())
-    }
-
-    fn draw_frame(&self, f: &mut Frame) {
-        todo!("Implement the drawing logic for the application frame")
-    }
-
-    fn handle_events(&mut self) -> io::Result<()> {
-        todo!("Implement the event handling logic for the application")
-    }
-}
+pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
