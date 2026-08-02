@@ -1,4 +1,4 @@
-/// Entrypoint for mc-backup-tui
+/// Defines the configuration for the application.
 
 /*
  Copyright (c) 2026 RayZh
@@ -21,15 +21,11 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-mod app;
-mod config;
+pub struct Config {
+}
 
-use std::io;
-use app::App;
-
-fn main() -> io::Result<()> {
-    let config = config::Config::new_default();
-    ratatui::run(|t| {
-        App::default().run(t, &config)
-    })
+impl Config {
+    pub fn new_default() -> Self {
+        Config {}
+    }
 }

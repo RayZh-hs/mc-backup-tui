@@ -1,4 +1,4 @@
-/// Entrypoint for mc-backup-tui
+/// Definies and implements of the main mc-backup-tui application.
 
 /*
  Copyright (c) 2026 RayZh
@@ -21,15 +21,17 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-mod app;
-mod config;
-
+use ratatui::DefaultTerminal;
 use std::io;
-use app::App;
+use crate::config;
 
-fn main() -> io::Result<()> {
-    let config = config::Config::new_default();
-    ratatui::run(|t| {
-        App::default().run(t, &config)
-    })
+#[derive(Debug, Default)]
+pub struct App {
+    exit: bool,
+}
+
+impl App {
+    pub fn run(&mut self, t: &mut DefaultTerminal, config: &config::Config) -> io::Result<()> {
+        Ok(())
+    }
 }
